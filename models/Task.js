@@ -1,14 +1,13 @@
 const mongoose = require('mongoose');
 
 const taskSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    description: { type: String },
+    title: { type: String, required: true, minLength: 1, maxLength:100 },
+    description: { type: String, minLength:0, maxLength:500 },
     status: { type: String, enum: ['pending', 'in-progress', 'completed'], default: 'pending' },
     reminder: {
-        date: { type: String, required: true },
-        time: { type: String, required: true },
-        message: { type: String, required: true },
-        required:false
+        date: { type: String},
+        time: { type: String},
+        message: { type: String, minLength:0, maxLength:255 },
     }
   },{
     timestamps:true

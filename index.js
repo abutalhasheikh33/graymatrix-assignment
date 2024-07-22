@@ -3,21 +3,24 @@ const app = express();
 require("dotenv").config()
 
 
-app.get('/', (req, res) => {
-    res.send('Hello World');
-});
+
+
+
+
+// db connection
+const dbConnection = require('./conn/dbConn');
+const taskRoutes  = require('./routers/taskRouters')
+const errorControllers = require('./controllers/errorControllers');
+dbConnection();
 
 
 // middleware
 app.use(express.json());
 
-
-// db connection
-const dbConnection = require('./conn/dbConn');
-dbConnection();
+app.use('/api/v1/',taskRoutes)
+app.use(errorControllers)
 
 
-
-app.listen(process.env.PORT || 3000, () => {
-    console.log('Server is running on port 3000');
+app.listen(process.env.PORT || 5000, () => {
+    console.log('Server is running on port 5000');
 });
