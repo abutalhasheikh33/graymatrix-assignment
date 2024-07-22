@@ -3,10 +3,11 @@ const AppError = require('../utils/AppError');
 
 class TaskController {
   
-  async getAllTasks(req, res) {
+  async getAllTasks(req, res,next) {
   
       const tasks = await taskService.getAllTasks();
       res.status(200).json(tasks);
+      console.log(x)
     
   }
 

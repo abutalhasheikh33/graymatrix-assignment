@@ -1,3 +1,9 @@
+process.on('uncaughtException',(err)=>{
+    console.log(err.name,err.message)
+    console.log('UNHANDLER EXCEPTION! Shutting down....')
+    process.exit(1)
+})
+
 const express = require('express');
 const app = express();
 require("dotenv").config()
@@ -21,6 +27,16 @@ app.use('/api/v1/',taskRoutes)
 app.use(errorControllers)
 
 
-app.listen(process.env.PORT || 5000, () => {
+const server = app.listen(process.env.PORT || 5000, () => {
     console.log('Server is running on port 5000');
 });
+
+process.on('unhandledRejection',(err)=>{
+    console.log(err.name,err.message)
+    console.log('UNHANDLER REJECTION! Shutting down....')
+    
+    server.close(()=>{
+        process.exit(1)
+    })
+})
+
