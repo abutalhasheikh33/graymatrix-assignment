@@ -10,7 +10,7 @@ require("dotenv").config()
 // db connection
 const dbConnection = require('./conn/dbConn');
 const taskRoutes  = require('./routers/taskRouters')
-const errorControllers = require('./controllers/errorControllers');
+const errorControllers = require('./controllers/errorController');
 dbConnection();
 
 
